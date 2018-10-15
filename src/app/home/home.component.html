@@ -1,0 +1,14 @@
+<ng-container *ngIf="bank.isReady">
+  <div class="container">
+    <div class="row">
+      <ng-container *ngFor="let item of bank.data">
+        <div class="col-xl-3 col-6">
+          <img class="poster" width="100%" src="http://image.tmdb.org/t/p/w342/{{item.poster_path}}">
+        </div>
+      </ng-container>    
+    </div>
+  </div>
+  <ng-container *ngFor="let item of bank.pagesArray">
+    <button (click)="selectPage(item)">{{item}}</button>
+  </ng-container>
+</ng-container>
