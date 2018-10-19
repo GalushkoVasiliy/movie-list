@@ -25,3 +25,9 @@ export interface AllData {
     };
     total_pages: number;
 }
+
+export interface MetaInterface {
+    title: string;
+    description: string;
+    navigate: string;
+}

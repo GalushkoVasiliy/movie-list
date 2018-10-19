@@ -1,5 +1,177 @@
-img.poster
-  border-radius: 10px
-  overflow: hidden
-  box-shadow: 0 0 25px rgba(0, 0, 0, 0.7)
-  margin: 10px 0
+#popUp
+  position: fixed
+  width: 100%
+  height: 100%
+  background: rgb(238, 240, 241)
+  z-index: 1
+  display: none
+  .blurPhoto
+    position: absolute
+    z-index: 1
+    width: 100%
+    height: 100%
+    background-size: cover
+    filter: blur(20px)
+    background-position: 50% 50%
+  .contentPopUp
+    width: 100%
+    height: 100%
+    position: absolute
+    z-index: 2
+    .navigationPopUp
+      height: 50px
+      padding: 15px 25px
+      .nav-i
+        color: white
+        border-radius: 15px
+        border: none
+        outline: none
+        cursor: pointer
+        font-size: 30px
+        transition: 0.3s
+        background: black
+        &:hover
+          color: pink
+        &:disabled
+          cursor: not-allowed
+          opacity: 0.7
+    .allMovieInfoWrapper
+      position: relative
+      top: 45%
+      left: 50%
+      transform: translate(-50%, -50%)
+      .posterPopUp
+        width: 250px
+        border-radius: 15px
+        box-shadow: 0 0 25px rgba(0, 0, 0, 0.7)
+      .infoWrapper, .mobInfo
+        height: 100%
+        width: 600px
+        hr
+          background: grey
+        .data
+          position: relative
+          top: 50%
+          left: 50%
+          transform: translate(-50%, -50%)
+          color: white
+.pageWrapper
+  background: rgb(238, 240, 241)
+  padding: 45px 0
+  position: relative
+  .posterBox
+    border-radius: 10px
+    overflow: hidden
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.7)
+    margin: 20px 0
+    background-size: cover
+    height: 400px
+    position: relative
+    .hoverTitle
+      width: 100%
+      height: 100%
+      position: absolute
+      background: rgba(0,0,0, 0.8)
+      color: white
+      transition: 0.3s
+      opacity: 0
+      cursor: pointer
+      span.title
+        position: absolute
+        top: 50%
+        left: 50%
+        transform: translate(-50%, -50%)
+        text-align: center
+      &:hover
+        opacity: 1
+
+::ng-deep
+  &.custom-pagination
+    .bja-pagination
+      margin: 0 auto
+      width: auto
+  &.bullet, &.nav-left, &.nav-right, &.nav-first, &.nav-last
+    display: none
+  &.firstPaginationButton
+    border-bottom-left-radius: 15px
+    border-top-left-radius: 15px
+  &.lastPaginationButton
+    border-bottom-right-radius: 15px
+    border-top-right-radius: 15px
+  &.nav-page
+    background: transparent
+    padding: 10px 12px
+    width: auto
+    min-width: 50px
+    outline: none !important
+    color: grey
+    transition: 0.3s
+    font-size: 12px
+    &:disabled
+      opacity: 0.3
+      cursor: not-allowed !important
+    &:hover
+      cursor: pointer
+  .active
+    color: red
+    outline: none
+    border: solid 1px #ccc
+
+@media (max-width: 576px)
+  .pageWrapper
+    .posterBox
+      height: 260px
+  #popUp
+    .contentPopUp
+      .navigationPopUp
+        .nav-i
+          font-size: 12px
+      .allMovieInfoWrapper
+        padding: 0 30px
+        font-size: 12px
+        .mobInfo
+          color: white
+          width: 100%
+        .posterPopUp
+          width: 100%
+        .infoWrapper
+          width: 100%
+          .title
+            font-size: 18px
+  ::ng-deep
+    &.nav-page
+      padding: 5px 10px
+      min-width: 40px
+@media (min-width: 577px) and (max-width: 768px)
+  .pageWrapper
+    .posterBox
+      height: 370px
+  #popUp
+    .contentPopUp
+      .allMovieInfoWrapper
+        .mobInfo
+          color: white
+          width: 100%
+        .posterPopUp
+          width: 100%
+        .infoWrapper
+          width: 100%
+@media (max-width: 1200px)
+  #popUp
+    .contentPopUp
+      .allMovieInfoWrapper
+        .mobInfo
+          color: white
+          width: 100%
+        .posterPopUp
+          width: 100%
+        .infoWrapper
+          width: 100%
+@media (min-width: 992px) and (max-width: 1200px)
+  .pageWrapper
+    .posterBox
+      height: 670px
+@media (min-width: 769px) and (max-width: 991px)
+  .pageWrapper
+    .posterBox
+      height: 500px

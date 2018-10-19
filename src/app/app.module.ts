@@ -15,7 +15,7 @@ import { HttpModule } from '@angular/http';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpModule
+    HttpModule,
   ],
   providers: [BankService, QueriesService],
   bootstrap: [AppComponent]
