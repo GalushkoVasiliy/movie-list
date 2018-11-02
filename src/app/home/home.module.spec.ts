@@ -1,4 +1,5 @@
 import { HomeModule } from './home.module';
+import { BjaPaginationModule } from 'bja-ngx-pagination';
 
 describe('HomeModule', () => {
   let homeModule: HomeModule;

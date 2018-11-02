@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Meta, Title } from '@angular/platform-browser';
-import {map} from 'rxjs/operators';
-import {AllData} from '../../../assets/interfaces/data';
+import { map } from 'rxjs/operators';
+import { AllData } from '../../../assets/interfaces/data';
 
 @Injectable({
   providedIn: 'root'

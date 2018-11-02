@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import {QueriesService} from '../queries/queries.service';
 import {AllData, MetaInterface, SingleDataInArray} from '../../../assets/interfaces/data';
-import {el} from '@angular/platform-browser/testing/src/browser_util';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +10,7 @@ export class BankService {
     allData;
     numberOfPages: number;
     numberOfPosts: number;
-    isReady: boolean = false;
+    isReady = false;
     data: SingleDataInArray[];
 
     title: MetaInterface = {
@@ -25,13 +24,14 @@ export class BankService {
     ) {
         this.allData = new Map();
     }
-
     /**
      * content availability check
      * @param pageNumber
      */
     public getData(pageNumber) {
         this.allData.has(pageNumber) ? this.data = this.allData.get(pageNumber) : this.dataRequest(pageNumber);
+        this.queries.setTitle(this.title.title + 'page №' + pageNumber);
+        this.queries.setDescription(this.title.description);
         this.isReady = true;
     }
 
@@ -40,8 +40,6 @@ export class BankService {
      * @param pageNumber
      */
     public dataRequest(pageNumber) {
-        this.queries.setTitle(this.title.title + 'page №' + pageNumber);
-        this.queries.setDescription(this.title.description);
         this.queries
             .getDataMovies(pageNumber)
                 .subscribe(
