@@ -1,0 +1,27 @@
+<div class="row no-gutters justify-content-center">
+  <div class="col-auto col-xl-auto">
+    <ng-container>
+      <button [disabled]="currentPage === 1" (click)="clickCustomButtons(1)" class="nav-page firstPaginationButton">
+        <span>First</span>
+      </button>
+      <button [disabled]="currentPage === 1" (click)="clickCustomButtons(currentPage - 1)" class="nav-page">
+        <span>Prev</span>
+      </button>
+    </ng-container>
+  </div>
+  <div class="col-auto col-xl-auto">
+    <ng-container>
+      <bja-pagination class="custom-pagination" (pageChanged)="selectPaginationItem($event)" [limit]="limit" [currentPage]="currentPage" [totalItems]="numberOfPosts"></bja-pagination>
+    </ng-container>
+  </div>
+  <div class="col-auto col-xl-auto">
+    <ng-container>
+      <button [disabled]="currentPage === numberOfPages" (click)="clickCustomButtons(currentPage + 1)" class="nav-page">
+        <span>Next</span>
+      </button>
+      <button [disabled]="currentPage === numberOfPages" (click)="clickCustomButtons(bank.numberOfPages)" class="nav-page lastPaginationButton">
+        <span>Last</span>
+      </button>
+    </ng-container>
+  </div>
+</div>

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import {QueriesService} from '../queries/queries.service';
-import {AllData, MetaInterface, SingleDataInArray} from '../../../assets/interfaces/data';
+import { QueriesService } from '../queries/queries.service';
+import { AllData, MetaInterface, SingleDataInArray } from '../../../assets/interfaces/data';
 
 @Injectable({
   providedIn: 'root'
@@ -21,9 +21,8 @@ export class BankService {
 
     constructor(
         public queries: QueriesService,
-    ) {
-        this.allData = new Map();
-    }
+    ) { this.allData = new Map(); }
+
     /**
      * content availability check
      * @param pageNumber
@@ -40,17 +39,16 @@ export class BankService {
      * @param pageNumber
      */
     public dataRequest(pageNumber) {
-        this.queries
-            .getDataMovies(pageNumber)
+        this.queries.getDataMovies(pageNumber)
                 .subscribe(
-                    (data: AllData)  => {
-                        this.allData.set(data.page, data.results);
-                        this.data = data.results;
-                        if (this.numberOfPages === undefined) {
-                            this.numberOfPages = data.total_pages;
-                            this.numberOfPosts = data.total_results;
-                        }
-                    }
+                    data  => {
+                        const value: AllData = { ... data.body };
+                        this.allData.set(value.page, value.results);
+                        this.data = value.results;
+                        this.numberOfPages = value.total_pages;
+                        this.numberOfPosts = value.total_results;
+                    },
+                    error => console.log(error)
                 );
     }
 }

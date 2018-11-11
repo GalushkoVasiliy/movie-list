@@ -1,0 +1,36 @@
+::ng-deep
+  &.custom-pagination
+    .bja-pagination
+      margin: 0 auto
+      width: auto
+  &.bullet, &.nav-left, &.nav-right, &.nav-first, &.nav-last
+    display: none
+  &.firstPaginationButton
+    border-bottom-left-radius: 15px
+    border-top-left-radius: 15px
+  &.lastPaginationButton
+    border-bottom-right-radius: 15px
+    border-top-right-radius: 15px
+  &.nav-page
+    background: transparent
+    padding: 10px 12px
+    width: auto
+    min-width: 50px
+    outline: none !important
+    color: grey
+    transition: 0.3s
+    font-size: 12px
+    &:disabled
+      opacity: 0.3
+      cursor: not-allowed !important
+    &:hover
+      cursor: pointer
+  .active
+    color: red
+    outline: none
+    border: solid 1px #ccc
+@media (max-width: 576px)
+  ::ng-deep
+    &.nav-page
+      padding: 5px 10px
+      min-width: 40px

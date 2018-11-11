@@ -6,7 +6,8 @@ import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { BankService } from './services/bank/bank.service';
 import { QueriesService } from './services/queries/queries.service';
-import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
+import { httpInterceptorProviders } from './services/interceptor/http-interceptor';
 
 @NgModule({
   declarations: [
@@ -15,9 +16,9 @@ import { HttpModule } from '@angular/http';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpModule,
+    HttpClientModule,
   ],
-  providers: [BankService, QueriesService],
-  bootstrap: [AppComponent]
+  providers: [ BankService, QueriesService, httpInterceptorProviders ],
+  bootstrap: [ AppComponent ],
 })
 export class AppModule { }

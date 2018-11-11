@@ -2,6 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HomeComponent } from './home.component';
 import { BankService } from '../services/bank/bank.service';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import {SingleDataInArray} from '../../assets/interfaces/data';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;

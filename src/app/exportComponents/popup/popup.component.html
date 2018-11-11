@@ -1,0 +1,53 @@
+<div id="popUp">
+  <div class="blurPhoto" *ngIf="popUpData" [ngStyle]="{'background-image': 'url(' + 'http://image.tmdb.org/t/p/w342/' + popUpData.poster_path + ')'}"></div>
+  <div class="contentPopUp" *ngIf="popUpData">
+    <div class="navigationPopUp">
+      <div class="row">
+        <div class="col-6">
+          <button *ngIf="functions.isMobile" class="nav-i" (click)="closePopUp()">< Back to list</button>
+          <button *ngIf="functions.isDesktop" class="nav-i" (click)="closePopUp()">< Back</button>
+        </div>
+        <div class="col-6 text-right">
+          <button *ngIf="functions.isMobile" class="nav-i" [disabled]="indexOfCurrentMovie === bank.data.length - 1" (click)="nextMovie()">Next Movie ></button>
+          <button *ngIf="functions.isDesktop" class="nav-i" [disabled]="indexOfCurrentMovie === bank.data.length - 1" (click)="nextMovie()">Next ></button>
+        </div>
+      </div>
+    </div>
+    <div class="allMovieInfoWrapper">
+      <div class="row justify-content-center" *ngIf="popUpData">
+        <div class="col-7 col-sm-4 col-xl-auto">
+          <img class="posterPopUp" src="http://image.tmdb.org/t/p/w342/{{popUpData.poster_path}}">
+        </div>
+        <div class="col-5 col-sm-4 d-xl-none">
+          <div class="mobInfo">
+            <div class="data">
+              <p>
+                <span>Score:</span><br/>
+                <span><b>{{popUpData.vote_average}}</b></span>
+              </p>
+              <p>
+                <span>Rating:</span><br/>
+                <span><b>R</b></span>
+              </p>
+              <p>
+                <span>Release Date:</span><br/>
+                <span><b>{{popUpData.release_date | date: 'longDate'}}</b></span>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-sm-8 col-xl-auto">
+          <div class="infoWrapper">
+            <div class="data">
+              <h2 class="title">{{popUpData.title}} ({{popUpData.release_date | date: 'yyyy'}})</h2>
+              <p *ngIf="functions.isDesktop">Score: {{popUpData.vote_average}} | Rating: R | Release Date: {{popUpData.release_date | date: 'longDate'}}</p>
+              <hr width="100%"/>
+              <p>{{popUpData.overview}}</p>
+              <hr width="100%"/>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

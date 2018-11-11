@@ -1,0 +1,97 @@
+#popUp
+  position: fixed
+  width: 100%
+  height: 100%
+  background: rgb(238, 240, 241)
+  z-index: 1
+  display: none
+  .blurPhoto
+    position: absolute
+    z-index: 1
+    width: 100%
+    height: 100%
+    background-size: cover
+    filter: blur(20px)
+    background-position: 50% 50%
+  .contentPopUp
+    width: 100%
+    height: 100%
+    position: absolute
+    z-index: 2
+    .navigationPopUp
+      height: 50px
+      padding: 15px 25px
+      .nav-i
+        color: white
+        border-radius: 15px
+        border: none
+        outline: none
+        cursor: pointer
+        font-size: 30px
+        transition: 0.3s
+        background: black
+        &:hover
+          color: pink
+        &:disabled
+          cursor: not-allowed
+          opacity: 0.7
+    .allMovieInfoWrapper
+      position: relative
+      top: 45%
+      left: 50%
+      transform: translate(-50%, -50%)
+      .posterPopUp
+        width: 250px
+        border-radius: 15px
+        box-shadow: 0 0 25px rgba(0, 0, 0, 0.7)
+      .infoWrapper, .mobInfo
+        height: 100%
+        width: 600px
+        hr
+          background: grey
+        .data
+          position: relative
+          top: 50%
+          left: 50%
+          transform: translate(-50%, -50%)
+          color: white
+@media (max-width: 576px)
+  #popUp
+    .contentPopUp
+      .navigationPopUp
+        .nav-i
+          font-size: 12px
+      .allMovieInfoWrapper
+        padding: 0 30px
+        font-size: 12px
+        .mobInfo
+          color: white
+          width: 100%
+        .posterPopUp
+          width: 100%
+        .infoWrapper
+          width: 100%
+          .title
+            font-size: 18px
+@media (min-width: 577px) and (max-width: 768px)
+  #popUp
+    .contentPopUp
+      .allMovieInfoWrapper
+        .mobInfo
+          color: white
+          width: 100%
+        .posterPopUp
+          width: 100%
+        .infoWrapper
+          width: 100%
+@media (max-width: 1200px)
+  #popUp
+    .contentPopUp
+      .allMovieInfoWrapper
+        .mobInfo
+          color: white
+          width: 100%
+        .posterPopUp
+          width: 100%
+        .infoWrapper
+          width: 100%

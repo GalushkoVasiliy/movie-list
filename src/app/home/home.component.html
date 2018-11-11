@@ -1,100 +1,17 @@
 <ng-container *ngIf="bank.isReady">
-  <div id="popUp">
-    <div class="blurPhoto" *ngIf="popUpData" [ngStyle]="{'background-image': 'url(' + 'http://image.tmdb.org/t/p/w342/' + popUpData.poster_path + ')'}"></div>
-    <div class="contentPopUp" *ngIf="popUpData">
-      <div class="navigationPopUp">
-        <div class="row">
-          <div class="col-6">
-            <button *ngIf="mobWindow === false" class="nav-i" (click)="closePopUp()">< Back to list</button>
-            <button *ngIf="mobWindow" class="nav-i" (click)="closePopUp()">< Back</button>
-          </div>
-          <div class="col-6" style="text-align: right">
-            <button *ngIf="mobWindow === false" class="nav-i" [disabled]="indexOfCurrentMovie === 19" (click)="nextMovie()">Next Movie ></button>
-            <button *ngIf="mobWindow" class="nav-i" [disabled]="indexOfCurrentMovie === bank.data.length - 1" (click)="nextMovie()">Next ></button>
-          </div>
-        </div>
-      </div>
-      <div class="allMovieInfoWrapper">
-        <div class="row justify-content-center" *ngIf="popUpData">
-          <div class="col-7 col-sm-4 col-xl-auto">
-            <img class="posterPopUp" src="http://image.tmdb.org/t/p/w342/{{popUpData.poster_path}}">
-          </div>
-          <div class="col-5 col-sm-4 d-xl-none">
-            <div class="mobInfo">
-              <div class="data">
-                <p>
-                  <span>Score:</span><br/>
-                  <span><b>{{popUpData.vote_average}}</b></span>
-                </p>
-                <p>
-                  <span>Rating:</span><br/>
-                  <span><b>R</b></span>
-                </p>
-                <p>
-                  <span>Release Date:</span><br/>
-                  <span><b>{{popUpData.release_date | date: 'longDate'}}</b></span>
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="col-12 col-sm-8 col-xl-auto">
-            <div class="infoWrapper">
-              <div class="data">
-                <h2 class="title">{{popUpData.title}} ({{popUpData.release_date | date: 'yyyy'}})</h2>
-                <p *ngIf="!mobWindow">Score: {{popUpData.vote_average}} | Rating: R | Release Date: {{popUpData.release_date | date: 'longDate'}}</p>
-                <hr width="100%"/>
-                <p>{{popUpData.overview}}</p>
-                <hr width="100%"/>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+
+  <ng-container *ngIf="closePopUp">
+
+    <app-popup [popUpData]="popUpData" [indexOfCurrentMovie]="indexOfCurrentMovie" (closeActivePopUp)="closePopUp = $event"></app-popup>
+
+  </ng-container>
+
   <div class="pageWrapper">
 
-    <div class="container">
-      <div class="row">
-        <ng-container *ngFor="let item of bank.data; let i = index">
-          <div class="col-xl-3 col-6">
-            <div class="posterBox" [ngStyle]="{'background-image': 'url(' + 'http://image.tmdb.org/t/p/w342/' + item.poster_path + ')'}">
-              <div class="hoverTitle" (click)="getPopUpData(item, i)">
-                <span class="title">{{item.title}}</span>
-              </div>
-            </div>
-          </div>
-        </ng-container>
-      </div>
-    </div>
+    <app-list-films [list]="bank.data" (popUpData)="popUp = $event" (indexOfCurrentMovie)="index = $event"></app-list-films>
 
-    <div class="row no-gutters justify-content-center">
-      <div class="col-auto col-xl-auto">
-        <ng-container>
-          <button [disabled]="currentPage === 1" (click)="clickCustomButtons(1)" class="nav-page firstPaginationButton">
-            <span>First</span>
-          </button>
-          <button [disabled]="currentPage === 1" (click)="clickCustomButtons(currentPage - 1)" class="nav-page">
-            <span>Prev</span>
-          </button>
-        </ng-container>
-      </div>
-      <div class="col-auto col-xl-auto">
-        <ng-container>
-          <bja-pagination class="custom-pagination" (pageChanged)="selectPaginationItem($event)" [limit]="limit" [currentPage]="currentPage" [totalItems]="bank.numberOfPosts"></bja-pagination>
-        </ng-container>
-      </div>
-      <div class="col-auto col-xl-auto">
-        <ng-container>
-          <button [disabled]="currentPage === bank.numberOfPages" (click)="clickCustomButtons(currentPage + 1)" class="nav-page">
-            <span>Next</span>
-          </button>
-          <button [disabled]="currentPage === bank.numberOfPages" (click)="clickCustomButtons(bank.numberOfPages)" class="nav-page lastPaginationButton">
-            <span>Last</span>
-          </button>
-        </ng-container>
-      </div>
-    </div>
+    <app-pagination [currentPage]="currentPage" [numberOfPages]="bank.numberOfPages" [numberOfPosts]="bank.numberOfPosts"></app-pagination>
 
   </div>
+
 </ng-container>

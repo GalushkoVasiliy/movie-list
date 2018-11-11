@@ -1,0 +1,36 @@
+::ng-deep.custom-pagination .bja-pagination {
+  margin: 0 auto;
+  width: auto; }
+::ng-deep.bullet, ::ng-deep.nav-left, ::ng-deep.nav-right, ::ng-deep.nav-first, ::ng-deep.nav-last {
+  display: none; }
+::ng-deep.firstPaginationButton {
+  border-bottom-left-radius: 15px;
+  border-top-left-radius: 15px; }
+::ng-deep.lastPaginationButton {
+  border-bottom-right-radius: 15px;
+  border-top-right-radius: 15px; }
+::ng-deep.nav-page {
+  background: transparent;
+  padding: 10px 12px;
+  width: auto;
+  min-width: 50px;
+  outline: none !important;
+  color: grey;
+  transition: 0.3s;
+  font-size: 12px; }
+  ::ng-deep.nav-page:disabled {
+    opacity: 0.3;
+    cursor: not-allowed !important; }
+  ::ng-deep.nav-page:hover {
+    cursor: pointer; }
+::ng-deep .active {
+  color: red;
+  outline: none;
+  border: solid 1px #ccc; }
+
+@media (max-width: 576px) {
+  ::ng-deep.nav-page {
+    padding: 5px 10px;
+    min-width: 40px; } }
+
+/*# sourceMappingURL=pagination.component.css.map */
