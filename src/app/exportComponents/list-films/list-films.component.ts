@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { SingleDataInArray } from '../../../assets/interfaces/data';
+import { FunctionsService } from '../../services/functions/functions.service';
 
 @Component({
   selector: 'app-list-films',
@@ -12,7 +13,9 @@ export class ListFilmsComponent {
     @Output() indexOfCurrentMovie = new EventEmitter();
     @Output() popUpData = new EventEmitter();
 
-    constructor() { }
+    constructor(
+        public functions: FunctionsService,
+    ) { }
 
     /**
      * function get movie's data for popUp

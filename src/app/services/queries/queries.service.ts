@@ -33,7 +33,7 @@ export class QueriesService {
      * Подставление полученного значения в title
      * @param {string} paramTitle
      */
-    setTitle(paramTitle: string) {
+    public setTitle(paramTitle: string) {
         return this.titleService.setTitle(paramTitle);
     }
 
@@ -42,7 +42,7 @@ export class QueriesService {
      * @param {string} paramDescription
      * @returns {HTMLMetaElement | null}
      */
-    setDescription(paramDescription: string) {
+    public setDescription(paramDescription: string) {
         return this.meta.addTag({ name: 'description', content: paramDescription});
     }
 

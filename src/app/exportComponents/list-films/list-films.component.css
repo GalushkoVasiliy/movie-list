@@ -5,7 +5,8 @@
   margin: 20px 0;
   background-size: cover;
   height: 400px;
-  position: relative; }
+  position: relative;
+  background-position: 50%; }
   .posterBox .hoverTitle {
     width: 100%;
     height: 100%;

@@ -2,7 +2,7 @@
   <div class="row">
     <ng-container *ngFor="let item of listFilms; let i = index">
       <div class="col-xl-3 col-6">
-        <div class="posterBox" [ngStyle]="{'background-image': 'url(' + 'http://image.tmdb.org/t/p/w342/' + item.poster_path + ')'}">
+        <div class="posterBox" [ngStyle]="{'background-image': 'url(' + functions.posterPathValidation(item.poster_path) + ')'}">
           <div class="hoverTitle" (click)="getPopUpData(i)">
             <span class="title">{{item.title}}</span>
           </div>

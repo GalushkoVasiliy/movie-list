@@ -7,6 +7,7 @@ import { ListFilmsComponent } from './list-films.component';
     CommonModule
   ],
   declarations: [ListFilmsComponent],
-  exports: [ListFilmsComponent]
+  exports: [ListFilmsComponent],
+  providers: []
 })
 export class ListFilmsModule { }

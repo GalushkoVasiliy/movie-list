@@ -2,7 +2,8 @@ import { EventEmitter, Injectable } from '@angular/core';
 import { QueriesService } from '../queries/queries.service';
 import { AllData, MetaInterface, SingleDataInArray } from '../../../assets/interfaces/data';
 import { from, Observable, Subject } from 'rxjs';
-import {postPagesCount} from '../../../assets/interfaces/PostsPages';
+import { postPagesCount } from '../../../assets/interfaces/PostsPages';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -17,9 +18,8 @@ export class BankService {
 
     constructor(
         public queries: QueriesService,
-    ) {
-        this.getData(this.currentPage);
-    }
+        private router: Router,
+    ) { this.getData(this.currentPage); }
 
     /**
      * content availability check
@@ -29,7 +29,6 @@ export class BankService {
         this.allData.has(pageNumber) ? this.pageListFilms.next(this.allData.get(pageNumber)) : this.dataRequest(pageNumber);
         this.queries.setTitle(`home page №${pageNumber}`);
         this.queries.setDescription(`view all movies page №${pageNumber}`);
-        this.isReady = true;
     }
 
     /**
@@ -47,8 +46,14 @@ export class BankService {
                             pages: value.total_pages,
                             posts: value.total_results
                         });
+                        this.isReady = true;
+
                     },
-                    error => console.log(error)
+                    error => {
+                        this.isReady = false;
+                        this.router.navigate(['/404']);
+                        console.log(error);
+                    }
                 );
     }
 }

@@ -1,5 +1,5 @@
 <div id="popUp">
-  <div class="blurPhoto" *ngIf="popUpData" [ngStyle]="{'background-image': 'url(' + 'http://image.tmdb.org/t/p/w342/' + popUpData.poster_path + ')'}"></div>
+  <div class="blurPhoto" *ngIf="popUpData" [ngStyle]="{'background-image': 'url(' + functions.posterPathValidation(popUpData.poster_path) + ')'}"></div>
   <div class="contentPopUp" *ngIf="popUpData">
     <div class="navigationPopUp">
       <div class="row">
@@ -16,7 +16,7 @@
     <div class="allMovieInfoWrapper">
       <div class="row justify-content-center" *ngIf="popUpData">
         <div class="col-7 col-sm-4 col-xl-auto">
-          <img class="posterPopUp" src="http://image.tmdb.org/t/p/w342/{{popUpData.poster_path}}">
+          <img class="posterPopUp" src="{{functions.posterPathValidation(popUpData.poster_path)}}">
         </div>
         <div class="col-5 col-sm-4 d-xl-none">
           <div class="mobInfo">
