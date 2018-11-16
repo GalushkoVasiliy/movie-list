@@ -8,7 +8,7 @@ import { SingleDataInArray } from '../../../assets/interfaces/data';
 })
 export class ListFilmsComponent {
 
-    @Input() list: SingleDataInArray[];
+    @Input() listFilms: SingleDataInArray[];
     @Output() indexOfCurrentMovie = new EventEmitter();
     @Output() popUpData = new EventEmitter();
 
@@ -19,8 +19,8 @@ export class ListFilmsComponent {
      * @param item
      * @param index
      */
-    public getPopUpData(item: SingleDataInArray, index: number): void {
+    public getPopUpData(index: number): void {
         this.indexOfCurrentMovie.emit(index);
-        this.popUpData.emit(item);
+        this.popUpData.emit(true);
     }
 }

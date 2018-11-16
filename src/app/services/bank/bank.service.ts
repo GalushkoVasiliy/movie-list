@@ -1,42 +1,40 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { QueriesService } from '../queries/queries.service';
 import { AllData, MetaInterface, SingleDataInArray } from '../../../assets/interfaces/data';
+import { from, Observable, Subject } from 'rxjs';
+import {postPagesCount} from '../../../assets/interfaces/PostsPages';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BankService {
 
-    allData;
-    numberOfPages: number;
-    numberOfPosts: number;
-    isReady = false;
-    data: SingleDataInArray[];
-
-    title: MetaInterface = {
-        title: 'home page',
-        description: 'view all movies page',
-        navigate: '/home'
-    };
+    public isReady = false;
+    public currentPage = 1;
+    public allData = new Map();
+    public statisticOfAllData: Subject<postPagesCount> = new Subject<postPagesCount>();
+    public pageListFilms: Subject<SingleDataInArray[]> = new Subject<SingleDataInArray[]>();
 
     constructor(
         public queries: QueriesService,
-    ) { this.allData = new Map(); }
+    ) {
+        this.getData(this.currentPage);
+    }
 
     /**
      * content availability check
      * @param pageNumber
      */
     public getData(pageNumber) {
-        this.allData.has(pageNumber) ? this.data = this.allData.get(pageNumber) : this.dataRequest(pageNumber);
-        this.queries.setTitle(this.title.title + 'page №' + pageNumber);
-        this.queries.setDescription(this.title.description);
+        this.allData.has(pageNumber) ? this.pageListFilms.next(this.allData.get(pageNumber)) : this.dataRequest(pageNumber);
+        this.queries.setTitle(`home page №${pageNumber}`);
+        this.queries.setDescription(`view all movies page №${pageNumber}`);
         this.isReady = true;
     }
 
     /**
-     * function test data_language
-     * @param pageNumber
+     * Function get request data from query service
+     * @param pageNumber {number}
      */
     public dataRequest(pageNumber) {
         this.queries.getDataMovies(pageNumber)
@@ -44,9 +42,11 @@ export class BankService {
                     data  => {
                         const value: AllData = { ... data.body };
                         this.allData.set(value.page, value.results);
-                        this.data = value.results;
-                        this.numberOfPages = value.total_pages;
-                        this.numberOfPosts = value.total_results;
+                        this.pageListFilms.next(value.results);
+                        this.statisticOfAllData.next({
+                            pages: value.total_pages,
+                            posts: value.total_results
+                        });
                     },
                     error => console.log(error)
                 );

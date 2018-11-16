@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FunctionsService } from '../../services/functions/functions.service';
 import { SingleDataInArray } from '../../../assets/interfaces/data';
 import { BankService } from '../../services/bank/bank.service';
+import { device } from '../../../assets/interfaces/device';
 
 @Component({
   selector: 'app-popup',
@@ -10,9 +11,12 @@ import { BankService } from '../../services/bank/bank.service';
 })
 export class PopupComponent implements OnInit {
 
-    @Input() popUpData;
-    @Input() indexOfCurrentMovie;
+    public deviceType: device;
+    @Input() listFilmsLength: number;
+    @Input() indexOfCurrentMovie: number;
+    @Input() popUpData: SingleDataInArray;
     @Output() closeActivePopUp = new EventEmitter();
+    @Output() newIndexOfCurrentMovie = new EventEmitter();
 
     constructor(
         public functions: FunctionsService,
@@ -20,6 +24,7 @@ export class PopupComponent implements OnInit {
     ) {}
 
     ngOnInit() {
+        this.deviceSubscribe();
         document.body.style.overflow = 'hidden';
         document.getElementById('popUp').style.display = 'block';
     }
@@ -37,7 +42,15 @@ export class PopupComponent implements OnInit {
      * function get next movie (indexOf current movie + 1)
      */
     public nextMovie(): void {
-        this.indexOfCurrentMovie = this.indexOfCurrentMovie + 1;
-        this.popUpData = this.bank.data[this.indexOfCurrentMovie];
+        this.newIndexOfCurrentMovie.emit(this.indexOfCurrentMovie + 1);
+    }
+
+    /**
+     * Function subscribe on device type function
+     */
+    public deviceSubscribe() {
+        this.functions.deviceSubject.subscribe({
+            next: (value: device) => { this.deviceType = value; },
+        });
     }
 }

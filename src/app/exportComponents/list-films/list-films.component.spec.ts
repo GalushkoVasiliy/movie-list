@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ListFilmsComponent } from './list-films.component';
-import {SingleDataInArray} from '../../../assets/interfaces/data';
+import { SingleDataInArray } from '../../../assets/interfaces/data';
 
 describe('ListFilmsComponent', () => {
   let component: ListFilmsComponent;
@@ -32,10 +32,15 @@ describe('ListFilmsComponent', () => {
   it('should return a SingleDataInArray object', () => {
       let popUpData: SingleDataInArray = {id: 1} as SingleDataInArray;
       const id = 1;
-
       component.getPopUpData(popUpData, id);
-      component.popUpData.subscribe((value: SingleDataInArray) => { popUpData = value; } );
-
+      component.popUpData.subscribe((value: SingleDataInArray) => popUpData = value );
       expect(popUpData.id).toBe(1);
+  });
+  it('should return id as number', () => {
+     let id = 1;
+     const popUpData: SingleDataInArray = {id: 1} as SingleDataInArray;
+     component.getPopUpData(popUpData, id);
+     component.indexOfCurrentMovie.subscribe(value => id = value);
+     expect(id).toBe(1);
   });
 });

@@ -1,33 +1,32 @@
 import { Injectable } from '@angular/core';
+import {fromEvent, ReplaySubject, Subject} from 'rxjs';
+import { device } from '../../../assets/interfaces/device';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FunctionsService {
 
-    public isMobile = false;
-    public isDesktop = false;
-
-    set typeDevice(value) {
-        if (value) {
-            this.isDesktop = true;
-            this.isMobile = false;
-        } else {
-            this.isDesktop = false;
-            this.isMobile = true;
-        }
-    }
+    public deviceSubject = new ReplaySubject(1);
 
     constructor() {
         this.windowSize();
         this.resizeListener();
     }
 
+    /**
+     * Function listener event resize browser window
+     */
     public resizeListener() {
-        window.addEventListener('resize', () => this.windowSize());
+        fromEvent(window, 'resize').subscribe(() => this.windowSize());
     }
 
+    /**
+     * Function send next value to subject device type
+     */
     public windowSize() {
-        document.documentElement.clientWidth < 1200 ? this.typeDevice = true : this.typeDevice = false;
+        document.documentElement.clientWidth < 1200 ?
+            this.deviceSubject.next({ isDesktop: false, isMobile: true }) :
+            this.deviceSubject.next({ isDesktop: true, isMobile: false });
     }
 }

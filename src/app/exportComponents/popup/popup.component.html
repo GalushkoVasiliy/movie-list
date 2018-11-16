@@ -4,12 +4,12 @@
     <div class="navigationPopUp">
       <div class="row">
         <div class="col-6">
-          <button *ngIf="functions.isMobile" class="nav-i" (click)="closePopUp()">< Back to list</button>
-          <button *ngIf="functions.isDesktop" class="nav-i" (click)="closePopUp()">< Back</button>
+          <button *ngIf="deviceType.isDesktop" class="nav-i" (click)="closePopUp()">< Back to list</button>
+          <button *ngIf="deviceType.isMobile" class="nav-i" (click)="closePopUp()">< Back</button>
         </div>
         <div class="col-6 text-right">
-          <button *ngIf="functions.isMobile" class="nav-i" [disabled]="indexOfCurrentMovie === bank.data.length - 1" (click)="nextMovie()">Next Movie ></button>
-          <button *ngIf="functions.isDesktop" class="nav-i" [disabled]="indexOfCurrentMovie === bank.data.length - 1" (click)="nextMovie()">Next ></button>
+          <button *ngIf="deviceType.isDesktop" class="nav-i" [disabled]="indexOfCurrentMovie === listFilmsLength - 1" (click)="nextMovie()">Next Movie ></button>
+          <button *ngIf="deviceType.isMobile" class="nav-i" [disabled]="indexOfCurrentMovie === listFilmsLength - 1" (click)="nextMovie()">Next ></button>
         </div>
       </div>
     </div>
@@ -40,7 +40,7 @@
           <div class="infoWrapper">
             <div class="data">
               <h2 class="title">{{popUpData.title}} ({{popUpData.release_date | date: 'yyyy'}})</h2>
-              <p *ngIf="functions.isDesktop">Score: {{popUpData.vote_average}} | Rating: R | Release Date: {{popUpData.release_date | date: 'longDate'}}</p>
+              <p *ngIf="deviceType.isDesktop">Score: {{popUpData.vote_average}} | Rating: R | Release Date: {{popUpData.release_date | date: 'longDate'}}</p>
               <hr width="100%"/>
               <p>{{popUpData.overview}}</p>
               <hr width="100%"/>

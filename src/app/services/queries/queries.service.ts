@@ -11,10 +11,6 @@ import { Observable, throwError } from 'rxjs';
 })
 export class QueriesService {
 
-    public url = 'http://api.themoviedb.org/3/';
-    public apiKey = 'ebea8cfca72fdff8d2624ad7bbf78e4c';
-    public config = `${this.url}movie/now_playing?api_key=${this.apiKey}&language=en-US&page=`;
-
     constructor(
         private http: HttpClient,
         private titleService: Title,
@@ -25,8 +21,8 @@ export class QueriesService {
      * Return data films
      * @param pageNumber
      */
-    public getDataMovies(pageNumber): Observable<HttpResponse<AllData>> {
-        return this.http.get<AllData>(this.config + pageNumber, { observe: 'response'})
+    public getDataMovies(pageNumber: string): Observable<HttpResponse<AllData>> {
+        return this.http.get<AllData>(`${pageNumber}`, { observe: 'response'})
             .pipe(
                 retry(3),
                 catchError(this.handleError)

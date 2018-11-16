@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { BankService } from '../services/bank/bank.service';
 import { SingleDataInArray } from '../../assets/interfaces/data';
-import {FunctionsService} from '../services/functions/functions.service';
+import { FunctionsService } from '../services/functions/functions.service';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -10,24 +11,16 @@ import {FunctionsService} from '../services/functions/functions.service';
 })
 export class HomeComponent implements OnInit {
 
-    currentPage = 1;
-    numberOfPages: number;
-    popUpData: SingleDataInArray;
-    indexOfCurrentMovie: number;
-    activePopUp = false;
+    public popUp = false;
+    public numberOfPages: number;
+    public numberOfPosts: number;
+    public indexCurrentMovie: number;
+    public popUpData: SingleDataInArray;
+    public listFilmsData: SingleDataInArray[];
+    public indexOfCurrentMovie = new Subject<number>();
 
-    public set popUp(event: SingleDataInArray) {
-        this.popUpData = event;
-        this.activePopUp = true;
-    }
-    public set index(event: number) {
-        this.indexOfCurrentMovie = event;
-    }
-    public get closePopUp() {
-        return this.activePopUp;
-    }
-    public set closePopUp(event: boolean) {
-        this.activePopUp = event;
+    set newIndexCurrentMovie(event) {
+        this.indexOfCurrentMovie.next(event);
     }
 
     constructor(
@@ -36,7 +29,40 @@ export class HomeComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.bank.getData(this.currentPage);
-        this.numberOfPages = this.bank.numberOfPages;
+        this.pageListSubscribe();
+        this.numberOfPagesSubscribe();
+        this.indexCurrentMovieSubscribe();
+    }
+
+    /**
+     * Function subscribe on current page list array[]
+     */
+    public pageListSubscribe() {
+        this.bank.pageListFilms.subscribe({ next: value => this.listFilmsData = value });
+    }
+
+    /**
+     * Function subscribe on statistic about how many films and pages
+     */
+    public numberOfPagesSubscribe() {
+        this.bank.statisticOfAllData.subscribe({
+            next: value => {
+                this.numberOfPages = value.pages;
+                this.numberOfPosts = value.posts;
+            }
+        });
+    }
+
+    /**
+     * Function subscribe on current index of movie for popUp
+     */
+    public indexCurrentMovieSubscribe() {
+        this.indexOfCurrentMovie.subscribe({
+                next: value => {
+                    this.popUpData = this.listFilmsData[value];
+                    this.indexCurrentMovie = value;
+                },
+                complete: () => this.popUp = true
+        });
     }
 }
