@@ -8,6 +8,8 @@
 
   <div class="pageWrapper">
 
+    <app-filters [listFilms]="listFilmsData" (filterListFilms)="filter = $event"></app-filters>
+
     <app-list-films [listFilms]="listFilmsData" (popUpData)="popUp = $event" (indexOfCurrentMovie)="indexOfCurrentMovie.next($event)"></app-list-films>
 
     <app-pagination [currentPage]="1" [numberOfPages]="numberOfPages" [numberOfPosts]="numberOfPosts"></app-pagination>

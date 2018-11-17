@@ -5,6 +5,7 @@ import { HomeRoutingModule } from './home-routing.module';
 import { PaginationModule } from '../exportComponents/pagination/pagination.module';
 import { ListFilmsModule } from '../exportComponents/list-films/list-films.module';
 import { PopupModule } from '../exportComponents/popup/popup.module';
+import { FiltersModule } from '../exportComponents/filters/filters.module';
 
 @NgModule({
   imports: [
@@ -12,7 +13,8 @@ import { PopupModule } from '../exportComponents/popup/popup.module';
     HomeRoutingModule,
     PaginationModule,
     ListFilmsModule,
-    PopupModule
+    PopupModule,
+    FiltersModule,
   ],
   declarations: [HomeComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

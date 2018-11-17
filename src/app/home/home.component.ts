@@ -22,6 +22,9 @@ export class HomeComponent implements OnInit {
     set newIndexCurrentMovie(event) {
         this.indexOfCurrentMovie.next(event);
     }
+    set filter(event) {
+        this.listFilmsData = event;
+    }
 
     constructor(
         public bank: BankService,
@@ -38,7 +41,7 @@ export class HomeComponent implements OnInit {
      * Function subscribe on current page list array[]
      */
     public pageListSubscribe() {
-        this.bank.pageListFilms.subscribe({ next: value => this.listFilmsData = value });
+        this.bank.pageListFilms.subscribe({ next: value => { this.listFilmsData = value; }});
     }
 
     /**
@@ -49,7 +52,8 @@ export class HomeComponent implements OnInit {
             next: value => {
                 this.numberOfPages = value.pages;
                 this.numberOfPosts = value.posts;
-            }
+            },
+            complete: () => this.bank.statisticOfAllData.unsubscribe()
         });
     }
 

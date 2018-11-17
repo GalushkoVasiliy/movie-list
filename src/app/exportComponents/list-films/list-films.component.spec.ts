@@ -25,22 +25,8 @@ describe('ListFilmsComponent', () => {
   });
 
   it('should be films data', () => {
-      component.list = [] as SingleDataInArray[];
+      component.listFilms = [] as SingleDataInArray[];
       fixture.detectChanges();
-      expect(component.list).toEqual([]);
-  });
-  it('should return a SingleDataInArray object', () => {
-      let popUpData: SingleDataInArray = {id: 1} as SingleDataInArray;
-      const id = 1;
-      component.getPopUpData(popUpData, id);
-      component.popUpData.subscribe((value: SingleDataInArray) => popUpData = value );
-      expect(popUpData.id).toBe(1);
-  });
-  it('should return id as number', () => {
-     let id = 1;
-     const popUpData: SingleDataInArray = {id: 1} as SingleDataInArray;
-     component.getPopUpData(popUpData, id);
-     component.indexOfCurrentMovie.subscribe(value => id = value);
-     expect(id).toBe(1);
+      expect(component.listFilms).toEqual([]);
   });
 });
