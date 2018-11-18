@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { SingleDataInArray } from '../../../assets/interfaces/data';
 import { Subject } from 'rxjs';
 
@@ -7,17 +7,13 @@ import { Subject } from 'rxjs';
   templateUrl: './filters.component.html',
   styleUrls: ['./filters.component.css']
 })
-export class FiltersComponent implements OnInit {
+export class FiltersComponent {
 
     public filter = new Subject();
     @Input() listFilms: SingleDataInArray[];
     @Output() filterListFilms = new EventEmitter;
 
     constructor() { }
-
-    ngOnInit() {
-        this.filterMovieListSubscribe();
-    }
 
     public filterFunction(value) {
         function sortFilmsListArrayByPopularity(a: SingleDataInArray, b: SingleDataInArray) {
@@ -35,8 +31,8 @@ export class FiltersComponent implements OnInit {
         function sortFilmsListArrayByReleaseData(a: SingleDataInArray, b: SingleDataInArray) {
             console.log(Date.parse(a.release_date));
             if (Date.parse(a.release_date) > (Date.parse(b.release_date))) {
-                return 1;
-            } else { return -1; }
+                return -1;
+            } else { return 1; }
         }
 
         switch (value) {
@@ -53,11 +49,5 @@ export class FiltersComponent implements OnInit {
                 this.filterListFilms.emit(this.listFilms);
                 break;
         }
-    }
-
-    /**
-     * Function subscribe on filters events
-     */
-    public filterMovieListSubscribe() {
     }
 }

@@ -19,7 +19,7 @@
       <button [disabled]="currentPage === numberOfPages" (click)="clickCustomButtons(currentPage + 1)" class="nav-page">
         <span>Next</span>
       </button>
-      <button [disabled]="currentPage === numberOfPages" (click)="clickCustomButtons(bank.numberOfPages)" class="nav-page lastPaginationButton">
+      <button [disabled]="currentPage === numberOfPages" (click)="clickCustomButtons(numberOfPages)" class="nav-page lastPaginationButton">
         <span>Last</span>
       </button>
     </ng-container>

@@ -1,5 +1,12 @@
 .filters {
-  padding: 35px 0;
-  background: #6c757d; }
+  padding: 35px 0; }
+  .filters button {
+    background: none;
+    border: 1px solid black;
+    cursor: pointer;
+    transition: 0.3s; }
+    .filters button:hover {
+      border-color: pink;
+      color: pink; }
 
 /*# sourceMappingURL=filters.component.css.map */
