@@ -13,26 +13,17 @@ export class FiltersComponent {
     @Input() listFilms: SingleDataInArray[];
     @Output() filterListFilms = new EventEmitter;
 
-    constructor() { }
-
     public filterFunction(value) {
         function sortFilmsListArrayByPopularity(a: SingleDataInArray, b: SingleDataInArray) {
-            if (a.popularity > b.popularity) {
-                return 1;
-            } else { return -1; }
+            return a.popularity > b.popularity ? 1 : -1;
         }
 
         function sortFilmsListArrayByVote(a: SingleDataInArray, b: SingleDataInArray) {
-            if (a.vote_average > b.vote_average) {
-                return 1;
-            } else { return -1; }
+            return a.vote_average > b.vote_average ? 1 : -1;
         }
 
         function sortFilmsListArrayByReleaseData(a: SingleDataInArray, b: SingleDataInArray) {
-            console.log(Date.parse(a.release_date));
-            if (Date.parse(a.release_date) > (Date.parse(b.release_date))) {
-                return -1;
-            } else { return 1; }
+            return Date.parse(a.release_date) > (Date.parse(b.release_date)) ? -1 : 1;
         }
 
         switch (value) {

@@ -30,7 +30,7 @@ export class QueriesService {
     }
 
     /**
-     * Подставление полученного значения в title
+     * function set title
      * @param {string} paramTitle
      */
     public setTitle(paramTitle: string) {
@@ -38,7 +38,7 @@ export class QueriesService {
     }
 
     /**
-     * Подставление полученного значения в description
+     * function set description
      * @param {string} paramDescription
      * @returns {HTMLMetaElement | null}
      */

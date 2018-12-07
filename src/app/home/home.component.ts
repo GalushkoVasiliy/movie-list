@@ -3,6 +3,8 @@ import { BankService } from '../services/bank/bank.service';
 import { SingleDataInArray } from '../../assets/interfaces/data';
 import { FunctionsService } from '../services/functions/functions.service';
 import { Subject } from 'rxjs';
+import {isArray} from 'util';
+import {forEach} from '@angular/router/src/utils/collection';
 
 @Component({
   selector: 'app-home',
